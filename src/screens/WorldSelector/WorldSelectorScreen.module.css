@@ -1,5 +1,4 @@
 .screen {
-  /* Rendered inside GameLayout */
   width: 100%;
   height: 100%;
   position: relative;
@@ -36,7 +35,7 @@
 .worldCard {
   position: relative;
   width: 95%;
-  max-width: 360px;
+  max-width: 390px;
   border-radius: 20px;
   background: rgba(202, 88, 64, 0.85);
   backdrop-filter: blur(10px);
@@ -46,29 +45,37 @@
   flex-direction: column;
   gap: 10px;
   z-index: 10;
-  min-height: 380px; /* ✅ enough for full description */
+  min-height: 420px;
   flex: none;
   overflow: hidden;
   justify-content: space-between;
+
+  /* ✅ mobile: spusti malo dole */
+  margin-top: 10px;
 }
 
 .worldLeft {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
 .worldImageWrap {
   width: 100%;
-  height: 110px;
-  border-radius: 12px;
+  height: 145px; /* ✅ a mrvu veća slika */
+  border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
 }
-.worldImage { width: 100%; height: 100%; object-fit: cover; }
+.worldImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .worldLabel {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   color: #fff;
   font-family: "Tomorrow", sans-serif;
@@ -79,10 +86,30 @@
 .worldRight {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   flex: 1;
   min-height: 0;
   overflow: hidden;
+}
+
+/* ✅ Mobile/Tablet: SKIP stays in-flow */
+.skipLink {
+  position: static;
+  align-self: flex-end;
+  margin: 2px 2px 0 0;
+  font-family: "Tomorrow", sans-serif;
+  font-size: 15px; /* ✅ više vidljiv */
+  font-weight: 900;
+  color: #fff;
+  opacity: 0.95;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.skipLink:hover {
+  opacity: 1;
 }
 
 .worldDesc {
@@ -93,17 +120,17 @@
   flex: 1;
   min-height: 0;
   overflow-y: visible;
-  padding: 0 5px;
-  font-size: 13px;
-  line-height: 1.45;
+  padding: 0 6px;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .playBtn {
   width: 100%;
-  height: 56px;
+  height: 60px;
   border-radius: 10px;
   background: #ffffff;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: #ca5840;
   cursor: pointer;
@@ -113,83 +140,154 @@
   flex-shrink: 0;
 }
 
-.skipLink {
-  position: fixed;
-  top: 10px;
-  right: 15px;
-  font-family: "Tomorrow", sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  color: #fff;
-  z-index: 100;
-  opacity: 0.8;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.skipLink:hover { opacity: 1; }
-
-/* Coming soon bar */
+/* ✅ Coming soon (mobile/tablet): red boxes + white icons */
 .comingSoonBar {
   width: 100%;
-  padding: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  margin-top: auto; /* ✅ pushes bar to bottom on mobile to remove empty space */
+  gap: 10px;
+  margin-top: auto;
   flex-shrink: 0;
 }
 
 .comingSoonInner {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   width: 100%;
 }
 
-.lockRow { display: flex; gap: 10px; align-items: center; }
+.lockRow {
+  display: flex;
+  gap: 16px; /* ✅ malo veći razmak */
+  align-items: center;
+  justify-content: center;
+}
 
 .lockCard {
-  width: 40px;
-  height: 32px;
-  border-radius: 6px;
-  background: rgba(202, 88, 64, 1);
+  width: 104px;  /* ✅ veće ikonice/boxovi */
+  height: 82px;
+  border-radius: 14px;
+  background: rgba(202, 88, 64, 0.95); /* ✅ crveni box (kao desktop) */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
   flex-shrink: 0;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
 }
-.lockIcon { width: 14px; filter: brightness(0) invert(1); }
+
+/* ✅ icon white */
+.lockIcon {
+  width: 32px;
+  filter: brightness(0) invert(1);
+}
 
 .comingSoonText {
-  font-size: 13px;
+  font-size: 19px; /* ✅ još veći tekst */
   color: #fff;
   font-family: "Tomorrow", sans-serif;
+  font-weight: 900;
   text-transform: uppercase;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.55);
 }
 
-.playerCrop { display: none; }
+.playerCrop {
+  display: none;
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .worldCard {
+    margin-top: 14px; /* ✅ još mrvu niže */
+  }
+
+  .worldImageWrap {
+    height: 135px;
+  }
+
+  .worldDesc {
+    font-size: 13px;
+  }
+
+  .lockCard {
+    width: 96px;
+    height: 76px;
+  }
+
+  .lockIcon {
+    width: 30px;
+  }
+
+  .comingSoonText {
+    font-size: 18px;
+  }
+}
 
 /* Tablet */
 @media (min-width: 768px) {
-  .title { font-size: 26px; margin: 14px 0 10px; }
-  .worldCard { max-width: 520px; padding: 22px; gap: 14px; height: 440px; }
-  .worldImageWrap { height: 140px; }
-  .worldLabel { font-size: 20px; }
-  .worldDesc { font-size: 14px; line-height: 1.5; }
-  .playBtn { height: 50px; font-size: 20px; }
-  .lockCard { width: 60px; height: 48px; }
-  .lockIcon { width: 20px; }
-  .comingSoonText { font-size: 15px; }
+  .title {
+    font-size: 26px;
+    margin: 14px 0 10px;
+  }
+
+  .worldCard {
+    max-width: 600px;
+    padding: 22px;
+    gap: 14px;
+    min-height: 540px;
+    margin-top: 18px; /* ✅ spusti malo dole */
+  }
+
+  .worldImageWrap {
+    height: 210px; /* ✅ veća world slika */
+    border-radius: 16px;
+  }
+
+  .worldLabel {
+    font-size: 22px;
+  }
+
+  .skipLink {
+    font-size: 18px;
+    margin-top: 6px;
+  }
+
+  .worldDesc {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .playBtn {
+    height: 64px;
+    font-size: 24px;
+  }
+
+  .lockCard {
+    width: 124px;
+    height: 94px;
+  }
+
+  .lockIcon {
+    width: 36px;
+  }
+
+  .comingSoonText {
+    font-size: 22px;
+  }
 }
 
 /* Desktop */
@@ -216,47 +314,49 @@
     position: relative;
     left: 0;
     top: 0;
-    width: 940px;
-    height: auto;
-    min-height: 480px;
+
+    /* ✅ desktop: širina veća (ne povećavamo visinu) */
+    width: 1040px;
+
+    min-height: 520px;
     max-width: none;
     display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 36px;
+    grid-template-columns: 460px 1fr; /* ✅ više prostora lijevo */
+    gap: 38px;
+
     padding: 46px;
-    padding-bottom: 108px;
+    padding-bottom: 130px; /* ✅ dovoljno da PLAY ne dodiruje text */
     margin-right: 0;
+
     text-align: left;
     flex: none;
     overflow: visible;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
   }
 
-  .worldLeft { flex-shrink: 0; width: 420px; gap: 15px; }
-  .worldImageWrap { height: 280px; border-radius: 16px; }
-  .worldLabel { font-size: 32px; text-align: left; margin-top: 5px; }
-
-  .worldRight { overflow: visible; justify-content: flex-start; position: relative; padding-top: 34px; }
-  .worldDesc {
-    font-size: 16px;
-    text-align: left;
-    overflow: visible;
-    padding-right: 0;
-    line-height: 1.6;
-    max-height: none;
-    overflow-y: visible;
+  .worldLeft {
+    flex-shrink: 0;
+    width: 460px;
+    gap: 15px;
   }
 
-  .playBtn {
-    position: absolute;
-    left: 50%;
-    bottom: -40px;
-    transform: translateX(-50%);
-    width: 420px;
-    height: 86px;
-    font-size: 30px;
-    margin: 0;
-    z-index: 50;
+  .worldImageWrap {
+    height: 300px;
+    border-radius: 16px;
+  }
+
+  .worldLabel {
+    font-size: 34px;
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .worldRight {
+    overflow: visible;
+    justify-content: flex-start;
+    position: relative;
+    padding-top: 26px;
+    padding-bottom: 110px;
   }
 
   .skipLink {
@@ -265,16 +365,35 @@
     right: 0;
     font-size: 18px;
     z-index: 100;
-    text-shadow: none;
     opacity: 0.85;
   }
-  .skipLink:hover { opacity: 1; }
+
+  .worldDesc {
+    font-size: 19px; /* ✅ mrvu veći opis */
+    text-align: left;
+    overflow: visible;
+    padding-right: 0;
+    line-height: 1.65;
+    max-height: none;
+  }
+
+  .playBtn {
+    position: absolute;
+    left: 50%;
+    bottom: -44px;
+    transform: translateX(-50%);
+    width: 460px;
+    height: 90px;
+    font-size: 32px;
+    margin: 0;
+    z-index: 50;
+  }
 
   .comingSoonBar {
     position: relative;
-    width: 940px;
+    width: 1040px;
     max-width: none;
-    height: 140px;
+    height: 150px;
     flex-direction: row;
     padding: 0 40px;
     background: rgba(0, 0, 0, 0.2);
@@ -285,32 +404,93 @@
   }
 
   .comingSoonInner {
+    flex-direction: row;
     padding: 0;
     width: 100%;
-    gap: 25px;
+    gap: 26px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .lockRow {
     justify-content: flex-start;
   }
 
-  .lockCard { width: 120px; height: 100px; border-radius: 14px; }
-  .lockIcon { width: 34px; }
-  .comingSoonText { font-size: 20px; }
+  .lockCard {
+    width: 120px;
+    height: 100px;
+    border-radius: 14px;
+    background: rgba(202, 88, 64, 1);
+    box-shadow: none;
+  }
 
+  .lockIcon {
+    width: 34px;
+    filter: brightness(0) invert(1);
+  }
+
+  .comingSoonText {
+    font-size: 24px;
+    white-space: nowrap;
+  }
+
+  /* ✅ Desktop character: bigger + slightly left */
   .playerCrop {
     display: block;
     position: absolute;
-    right: 0;
+    right: -10px;
     top: 50%;
-    bottom: auto;
-    height: min(92vh, 980px);
+    height: min(98vh, 1180px); /* ✅ veći karakter */
     pointer-events: none;
     overflow: hidden;
     z-index: 5;
-    transform: translate(6%, -50%);
+    transform: translate(-4%, -50%); /* ✅ mrvu ulijevo */
   }
-  .playerImg { height: 100%; display: block; width: auto; object-fit: contain; }
+
+  .playerImg {
+    height: 100%;
+    display: block;
+    width: auto;
+    object-fit: contain;
+  }
 }
 
-.caret { display: inline-block; width: 8px; height: 14px; margin-left: 4px; vertical-align: -2px; background: rgba(0, 0, 0, 0.35); animation: caretBlink 700ms steps(1) infinite; }
-@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-@keyframes lockShake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
-.lockShake { animation: lockShake 420ms ease; }
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: rgba(0, 0, 0, 0.35);
+  animation: caretBlink 700ms steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lockShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.lockShake {
+  animation: lockShake 420ms ease;
+}

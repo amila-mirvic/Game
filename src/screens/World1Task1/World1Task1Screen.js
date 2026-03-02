@@ -43,7 +43,7 @@ export default function World1Task1Screen() {
 
   // ✅ routes
   const MAIN_MENU_ROUTE = "/world-1";
-  const TASK2_ROUTE = "/world-1/task-2";
+  const TASK2_ROUTE = "/world-1/task-2-intro";
 
   /* ------------------------------------ */
   /* GAME DATA (TASK 1: 10 statements) */
