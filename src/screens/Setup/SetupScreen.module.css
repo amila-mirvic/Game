@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: flex-start;
   /* ✅ reserve space for bottom avatars on mobile/tablet */
-  padding: 10px 15px 210px;
+  padding: 10px 15px 230px;
   box-sizing: border-box;
   z-index: 5;
 }
@@ -31,7 +31,7 @@
   width: min(92vw, 520px);
   background: rgba(202, 88, 64, 0.82);
   border-radius: 18px;
-  padding: 22px 22px 90px;
+  padding: 26px 22px 92px; /* ✅ malo veći card da stane tekst */
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
   text-align: center;
@@ -40,11 +40,12 @@
   margin-top: 10px;
 }
 
+/* ✅ MOB: opis ne smije biti “odrezan” */
 .descriptionWrap {
   position: relative;
   margin-top: 6px;
-  height: 180px;
-  overflow: hidden;
+  height: auto;           /* ✅ uklonjena fiksna visina */
+  overflow: visible;      /* ✅ uklonjeno rezanje */
 }
 
 .description {
@@ -60,7 +61,7 @@
   position: static;
   display: block;
   width: fit-content;
-  margin: 12px 0 6px auto;
+  margin: 14px 0 10px auto; /* ✅ više spacinga */
   padding: 2px 0;
   font-family: "Tomorrow", sans-serif;
   font-weight: 800;
@@ -137,13 +138,13 @@
   border: none;
   padding: 0;
   flex: 1;
-  max-width: 180px;
+  max-width: 220px; /* ✅ malo šire da kružići budu veći */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  opacity: 0.8; /* ✅ default state */
-  transform: none; /* ✅ no scale on mobile/tablet */
+  opacity: 0.8; /* default */
+  transform: none; /* no scale on mobile */
   transition: transform 0.25s ease, opacity 0.25s ease;
   filter: none;
   box-shadow: none;
@@ -154,12 +155,13 @@
 }
 
 .characterBtn.isUnselected {
-  opacity: 0.8; /* ✅ stays 80% when other selected */
+  opacity: 0.8;
 }
 
+/* ✅ MOB: veći kružići/karakteri */
 .characterImg {
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   object-fit: contain;
   display: block;
 }
@@ -178,20 +180,27 @@
   display: none;
 }
 
+/* Small phones: ipak malo smanji da sve stane lijepo */
+@media (max-width: 420px) {
+  .overlay {
+    padding-bottom: 225px;
+  }
+
+  .characterImg {
+    width: 155px;
+    height: 155px;
+  }
+}
+
 /* Tablet */
 @media (min-width: 768px) {
   .overlay {
-    padding-bottom: 240px;
+    padding-bottom: 260px;
   }
 
   .heroCard {
     max-width: 560px;
-    padding: 30px;
-    padding-bottom: 90px;
-  }
-
-  .descriptionWrap {
-    height: 200px;
+    padding: 32px 30px 94px;
   }
 
   .description {
@@ -209,12 +218,12 @@
   }
 
   .characterBtn {
-    max-width: 220px;
+    max-width: 260px;
   }
 
   .characterImg {
-    width: 160px;
-    height: 160px;
+    width: 190px;
+    height: 190px;
   }
 
   .playBtn {
@@ -249,6 +258,7 @@
 
   .descriptionWrap {
     height: 260px;
+    overflow: hidden; /* desktop ostaje kako je bilo */
     margin-top: 0;
   }
 
@@ -271,7 +281,7 @@
 
   .skipBtn {
     font-size: 14px;
-    margin: 14px 0 10px auto; /* ✅ more spacing, never overlaps */
+    margin: 14px 0 10px auto;
   }
 
   .playBtn {
@@ -304,10 +314,9 @@
   .characterBtn {
     flex: 0 0 auto;
     max-width: none;
-    opacity: 0.8; /* ✅ default */
+    opacity: 0.8;
   }
 
-  /* ✅ desktop: selected = 100% + scale up */
   .characterBtn.isSelected {
     opacity: 1;
     transform: scale(1.06);
