@@ -6,6 +6,27 @@ import styles from "./SetupScreen.module.css";
 export default function SetupScreen() {
   const navigate = useNavigate();
 
+  // ✅ responsive character assets (desktop full-body, mobile/tablet circles)
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 1024px)").matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const mq = window.matchMedia("(max-width: 1024px)");
+    const onChange = (e) => setIsMobileOrTablet(e.matches);
+
+    // Safari fallback
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else mq.addListener(onChange);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else mq.removeListener(onChange);
+    };
+  }, []);
+
   const [name, setName] = useState("");
   const [selected, setSelected] = useState(null); // null | "female" | "male"
 
@@ -31,10 +52,13 @@ export default function SetupScreen() {
   const AFTER_DESC_DELAY_MS = 650;
   const LABEL_SPEED_MS = 55;
 
-  // Background handled by GameLayout (desktop scaling + mobile fluid)
-
-  const femaleSrc = `${process.env.PUBLIC_URL}/characters/female.png`;
-  const maleSrc = `${process.env.PUBLIC_URL}/characters/male.png`;
+  // ✅ desktop uses full-body, mobile/tablet uses circle avatars
+  const femaleSrc = isMobileOrTablet
+    ? `${process.env.PUBLIC_URL}/characters/femalemobile.png`
+    : `${process.env.PUBLIC_URL}/characters/female.png`;
+  const maleSrc = isMobileOrTablet
+    ? `${process.env.PUBLIC_URL}/characters/malemobile.png`
+    : `${process.env.PUBLIC_URL}/characters/male.png`;
 
   const selectCharacter = (who) => {
     setSelected((prev) => (prev === who ? prev : who));
@@ -99,7 +123,8 @@ export default function SetupScreen() {
 
   const canPlay = name.trim().length > 0 && selected !== null;
 
-  const femaleShouldFloat = selected === null || (!femaleSelected && selected !== null);
+  const femaleShouldFloat =
+    selected === null || (!femaleSelected && selected !== null);
   const maleShouldFloat = selected === null || (!maleSelected && selected !== null);
 
   const handlePlay = () => {
@@ -108,7 +133,6 @@ export default function SetupScreen() {
     const payload = { name: name.trim(), character: selected };
     localStorage.setItem("yd_player", JSON.stringify(payload));
 
-    // ✅ go to world selector
     navigate("/world-select", { state: payload });
   };
 
@@ -131,9 +155,13 @@ export default function SetupScreen() {
               </p>
             </div>
 
-            {/* ✅ SKIP button below text and before play button */}
+            {/* ✅ SKIP button (now with spacing, no overlap) */}
             {!skipTyping && descText.length < fullDescription.length && (
-              <button type="button" className={styles.skipBtn} onClick={handleSkip}>
+              <button
+                type="button"
+                className={styles.skipBtn}
+                onClick={handleSkip}
+              >
                 SKIP TYPING
               </button>
             )}
@@ -168,21 +196,6 @@ export default function SetupScreen() {
 
           {/* RIGHT / BOTTOM CHARACTERS */}
           <div className={styles.charactersArea} aria-label="Characters">
-            <div className={styles.hitboxLayer} aria-hidden="true">
-              <button
-                type="button"
-                className={[styles.hitbox, styles.femaleHitbox].join(" ")}
-                onClick={() => selectCharacter("female")}
-                tabIndex={-1}
-              />
-              <button
-                type="button"
-                className={[styles.hitbox, styles.maleHitbox].join(" ")}
-                onClick={() => selectCharacter("male")}
-                tabIndex={-1}
-              />
-            </div>
-
             <button
               type="button"
               onClick={() => selectCharacter("female")}
@@ -195,7 +208,12 @@ export default function SetupScreen() {
               ].join(" ")}
               aria-label="Female"
             >
-              <div className={[styles.imgCrop, femaleSelected ? styles.cropSelected : ""].join(" ")}>
+              <div
+                className={[
+                  styles.imgCrop,
+                  femaleSelected ? styles.cropSelected : "",
+                ].join(" ")}
+              >
                 <img
                   className={[
                     styles.characterImg,
@@ -220,7 +238,12 @@ export default function SetupScreen() {
               ].join(" ")}
               aria-label="Male"
             >
-              <div className={[styles.imgCrop, maleSelected ? styles.cropSelected : ""].join(" ")}>
+              <div
+                className={[
+                  styles.imgCrop,
+                  maleSelected ? styles.cropSelected : "",
+                ].join(" ")}
+              >
                 <img
                   className={[
                     styles.characterImg,

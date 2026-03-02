@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* centriranje */
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -30,7 +30,7 @@
   text-align: center;
   z-index: 10;
   position: relative;
-  margin-top: -10vh;
+  margin-top: 0; /* uklonjen pomak */
 }
 
 .logo {
@@ -84,7 +84,23 @@
   z-index: 5;
 }
 
-/* Desktop */
+/* 📱 Tablet + Mobile */
+@media (max-width: 1024px) {
+  .characters {
+    display: none; /* sakriveni karakteri */
+  }
+
+  .heroCard {
+    margin-top: 0;
+  }
+
+    .logo {
+    width: 60%;
+    margin-bottom: 0px;
+  }
+}
+
+/* 🖥 Desktop */
 @media (min-width: 1025px) {
   .wrapper {
     display: block;
@@ -96,7 +112,7 @@
     position: absolute;
     left: 70px;
     top: 50%;
-    transform: translateY(-50%); /* ✅ box centered vertically */
+    transform: translateY(-50%);
     width: 620px;
     padding: 44px 44px 118px;
     margin: 0;
@@ -104,7 +120,7 @@
   }
 
   .logo {
-    width: 170px;
+    width: 50%;
     margin-bottom: 18px;
   }
 
@@ -122,24 +138,21 @@
     height: 80px;
     font-size: 30px;
     bottom: -40px;
+    font-weight: 700;
   }
 
   .characters {
     display: block;
     position: absolute;
     right: 0;
-    bottom: 0; /* ✅ truly bottom-attached */
+    bottom: 0;
     width: auto;
-
-    /* ✅ responsive: fill height without forcing overflow */
     height: 100%;
-
     max-width: none;
     margin: 0;
     pointer-events: none;
     user-select: none;
     z-index: 5;
-
     transform: translate3d(10%, 0, 0);
   }
 }
