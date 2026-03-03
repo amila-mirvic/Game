@@ -318,7 +318,7 @@
     /* ✅ desktop: širina veća (ne povećavamo visinu) */
     width: 1040px;
 
-    min-height: 520px;
+    min-height: 500px;
     max-width: none;
     display: grid;
     grid-template-columns: 460px 1fr; /* ✅ više prostora lijevo */
@@ -440,7 +440,7 @@
     position: absolute;
     right: -10px;
     top: 50%;
-    height: min(98vh, 1180px); /* ✅ veći karakter */
+    height: min(100vh, 1180px); /* ✅ veći karakter */
     pointer-events: none;
     overflow: hidden;
     z-index: 5;

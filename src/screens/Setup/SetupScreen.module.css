@@ -263,7 +263,7 @@
   }
 
   .label {
-    font-size: 14px;
+    font-size: 20px;
     margin-top: 22px;
   }
 
@@ -280,7 +280,7 @@
   }
 
   .skipBtn {
-    font-size: 14px;
+    font-size: 18px;
     margin: 14px 0 10px auto;
   }
 
@@ -305,7 +305,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    gap: 28px;
+    gap: 0px;
     padding: 0;
     z-index: 5;
     overflow: visible;
@@ -329,8 +329,8 @@
 
   .characterImg {
     width: auto;
-    height: min(88vh, 920px);
-    max-height: 920px;
+    height: min(100vh, 920px);
+    max-height: 1000px;
     object-fit: contain;
   }
 
