@@ -141,3 +141,61 @@
   .endActions { flex-direction: row; gap: 18px; }
   .endActionBtn { height: 70px; font-size: 18px; }
 }
+
+
+/* === DESKTOP FLUID FIX === */
+@media (min-width:1024px){
+
+:root{
+  --task-max-width: min(900px, 90vw);
+}
+
+.character img,
+.characterImage{
+  max-height:60vh;
+  width:auto;
+  object-fit:contain;
+}
+
+.instructionsCharacter img{
+  max-height:55vh;
+}
+
+.card,
+.statementCard,
+.taskCard{
+  max-width:var(--task-max-width);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.options,
+.answers,
+.answerOptions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:clamp(10px,2vw,22px);
+}
+
+.options img,
+.answers img,
+.answerOptions img{
+  width:clamp(48px,5vw,90px);
+  height:auto;
+}
+
+button,
+.optionButton{
+  font-size:clamp(14px,1.2vw,18px);
+}
+
+h1,h2{
+  font-size:clamp(24px,3vw,40px);
+}
+
+p{
+  font-size:clamp(14px,1.2vw,18px);
+}
+
+}
